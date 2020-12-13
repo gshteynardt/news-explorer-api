@@ -1,0 +1,24 @@
+const routers = require('express').Router();
+const userRoutes = require('./users.js');
+const errorsRoutes = require('./errors.js');
+const auth = require('../middlewares/auth');
+
+const {
+  loginUser,
+  createUser,
+} = require('../controllers/users');
+
+routers.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
+
+routers.post('/signup', createUser);
+routers.post('/signin', loginUser);
+routers.use(auth);
+routers.use('/', userRoutes);
+routers.use('/', errorsRoutes);
+
+module.exports = routers;
+
