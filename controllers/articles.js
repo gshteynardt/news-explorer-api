@@ -26,7 +26,8 @@ const createArticle = async (req, res, next) => {
     res.status(200).send(data);
   } catch (err) {
     if (err.name === 'MongoError' && err.code === 11000) {
-      next(new ConflictError('Невалидные данные'));
+      const errors = Object.values(err.errors).map(error => error.message).join(', ');
+      next(new ConflictError(errors));
     } else if (err.name === 'ValidationError') {
       next(new BadRequestErr('Невалидные данные'));
     } else {
@@ -41,7 +42,6 @@ const deleteArticle = async (req, res, next) => {
     const user = String(req.user);
 
     const { articleId } = req.params;
-    console.log(typeof articleId, typeof user)
     const queryArticle = await Article.findById(articleId)
       .orFail(new NotFoundError('Карточка не найдена'));
     const queryCardOwner = String(queryArticle.owner);

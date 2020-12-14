@@ -54,6 +54,8 @@ const validationDataArticle = celebrate({
       .message({
         'any.required': 'Поле "keyword" должно быть заполнено',
         'string.empty': 'Поле "keyword" не должно быть пустым',
+        'string.min': 'Минимальная длина поля "keyword" - 2 символа',
+        'string.max': 'Максимальная длина поля "keyword" - 30 символов',
       }),
     title: Joi.string().required().custom(checkValueEmpty)
       .messages({
@@ -65,11 +67,11 @@ const validationDataArticle = celebrate({
         'any.required': 'Поле "text" должно быть заполнено',
         'string.empty': 'Поле "text" не должно быть пустым',
       }),
-    date: Joi.string().required()
-      .messages({
-        'any.required': 'Поле "date" должно быть заполнено',
-        'string.empty': 'Поле "date" не должно быть пустым',
-      }),
+    // date: Joi.string().required()
+    //   .messages({
+    //     'any.required': 'Поле "date" должно быть заполнено',
+    //     'string.empty': 'Поле "date" не должно быть пустым',
+    //   }),
     source: Joi.string().required().custom(checkValueEmpty)
       .messages({
         'any.required': 'Поле "source" должно быть заполнено',
@@ -80,8 +82,8 @@ const validationDataArticle = celebrate({
         'any.required': 'Поле "image" должно быть заполнено',
         'string.empty': 'Поле "image" не должно быть пустым',
       }),
-    link: Joi.string().custom(urlValidation).required()
-      .message({
+    link: Joi.string().required().custom(urlValidation)
+      .messages({
         'any.required': 'Поле "link" должно быть заполнено',
         'string.empty': 'Поле "link" не должно быть пустым',
       }),
