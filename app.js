@@ -2,6 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const routers = require('./routes/index.js');
+const { errors } = require('celebrate');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 const cors = require('cors');
 require('dotenv').config();
 
@@ -17,7 +19,10 @@ mongoose.connect('mongodb://localhost:27017/newsdb', {
   useFindAndModify: false,
 });
 
+app.use(requestLogger);
 app.use('/', routers);
+app.use(errorLogger);
+app.use(errors());
 
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;

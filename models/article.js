@@ -45,7 +45,8 @@ const articleSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'user',
     required: true,
+    select: false,
   },
 });
 
-module.exports = mongoose.model('card', articleSchema);
+module.exports = mongoose.model('article', articleSchema);
