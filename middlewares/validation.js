@@ -67,11 +67,11 @@ const validationDataArticle = celebrate({
         'any.required': 'Поле "text" должно быть заполнено',
         'string.empty': 'Поле "text" не должно быть пустым',
       }),
-    // date: Joi.string().required()
-    //   .messages({
-    //     'any.required': 'Поле "date" должно быть заполнено',
-    //     'string.empty': 'Поле "date" не должно быть пустым',
-    //   }),
+    date: Joi.string().required().custom(checkValueEmpty)
+      .messages({
+        'any.required': 'Поле "date" должно быть заполнено',
+        'string.empty': 'Поле "date" не должно быть пустым',
+      }),
     source: Joi.string().required().custom(checkValueEmpty)
       .messages({
         'any.required': 'Поле "source" должно быть заполнено',

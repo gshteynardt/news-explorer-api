@@ -18,8 +18,8 @@ const articleSchema = new mongoose.Schema({
     required: [true, `поле 'text' должно быть заполнено`],
   },
   date: {
-    type: Date,
-    default: Date.now(),
+    type: String,
+    required: [true, `поле 'date' должно быть заполнено`],
   },
   source: {
     type: String,
