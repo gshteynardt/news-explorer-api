@@ -1,5 +1,5 @@
 const isURL = require('validator/lib/isURL');
-const { CelebrateError } = require("celebrate");
+const { CelebrateError } = require('celebrate');
 
 const urlValidation = (value) => {
   if (!isURL(value)) {

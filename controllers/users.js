@@ -4,6 +4,7 @@ const UnauthorizedErr = require('../errors/unauthorized-err');
 const ConflictError = require('../errors/conflict-err');
 const BadRequestErr = require('../errors/bad-request-err');
 const { generateToken } = require('../utils/generateToken');
+
 const saltRounds = 10;
 
 const getUser = async (req, res, next) => {
@@ -62,4 +63,4 @@ module.exports = {
   getUser,
   createUser,
   loginUser,
-}
+};

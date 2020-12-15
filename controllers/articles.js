@@ -18,7 +18,7 @@ const getArticles = async (req, res, next) => {
 const createArticle = async (req, res, next) => {
   try {
     const owner = req.user;
-    const savedArticle = await Article.create({...req.body, owner});
+    const savedArticle = await Article.create({ ...req.body, owner });
 
     const data = savedArticle.toJSON();
     delete data.owner;
@@ -26,7 +26,7 @@ const createArticle = async (req, res, next) => {
     res.status(200).send(data);
   } catch (err) {
     if (err.name === 'MongoError' && err.code === 11000) {
-      const errors = Object.values(err.errors).map(error => error.message).join(', ');
+      const errors = Object.values(err.errors).map((error) => error.message).join(', ');
       next(new ConflictError(errors));
     } else if (err.name === 'ValidationError') {
       next(new BadRequestErr('Невалидные данные'));
@@ -58,7 +58,6 @@ const deleteArticle = async (req, res, next) => {
 
   return null;
 };
-
 
 module.exports = {
   getArticles,

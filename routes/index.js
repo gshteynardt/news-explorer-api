@@ -24,4 +24,3 @@ routers.use('/', articleRoutes);
 routers.use('/', errorsRoutes);
 
 module.exports = routers;
-

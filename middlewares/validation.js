@@ -1,6 +1,6 @@
+const { celebrate, Joi } = require('celebrate');
 const urlValidation = require('../utils/urlValidation');
 const checkValueEmpty = require('../utils/checkValueEmpty');
-const { celebrate, Joi } = require('celebrate');
 
 const idUserValidation = celebrate({
   params: Joi.object().keys({

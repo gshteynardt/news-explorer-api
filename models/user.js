@@ -6,24 +6,24 @@ const UnauthorizedErr = require('../errors/unauthorized-err');
 const userSchema = new mongoose.Schema({
   email: {
     type: String,
-    required: [true, `поле 'email' должно быть заполнено`],
+    required: [true, 'поле \'email\' должно быть заполнено'],
     unique: [true, 'email must be unique'],
     validate: {
       validator: (value) => isEmail(value),
-      message: `поле 'email' должно быть валидным email адресом`,
+      message: 'поле \'email\' должно быть валидным email адресом',
     },
   },
   password: {
     type: String,
-    required: [true, `поле 'password' должно быть заполнено`],
-    minlength: [ 5, `минимальная длина поля 'password' - 5`],
+    required: [true, 'поле \'password\' должно быть заполнено'],
+    minlength: [5, 'минимальная длина поля \'password\' - 5'],
     select: false,
   },
   name: {
     type: String,
     required: false,
-    minlength: [ 2, `минимальная длина поля 'name' - 2`],
-    maxlength: [ 30, `максимальная длина поля 'name' - 5`],
+    minlength: [2, 'минимальная длина поля \'name\' - 2'],
+    maxlength: [30, 'максимальная длина поля \'name\' - 5'],
   },
 });
 
