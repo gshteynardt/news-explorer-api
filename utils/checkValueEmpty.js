@@ -4,7 +4,7 @@ const checkValueEmpty = (value) => {
   if(!value.trim()) {
     throw new CelebrateError('поле должно быть заполнено');
   }
-  return value
+  return true
 };
 
 module.exports = checkValueEmpty;
