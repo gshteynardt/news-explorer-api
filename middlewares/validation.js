@@ -1,6 +1,5 @@
 const { celebrate, Joi } = require('celebrate');
 const urlValidation = require('../utils/urlValidation');
-const checkValueEmpty = require('../utils/checkValueEmpty');
 
 const idUserValidation = celebrate({
   params: Joi.object().keys({
@@ -15,7 +14,7 @@ const idUserValidation = celebrate({
 
 const idArticleValidation = celebrate({
   params: Joi.object().keys({
-    id: Joi.string().length(24).hex()
+    articleId: Joi.string().length(24).hex()
       .message({
         'string.empty': 'Поле "articleId" не должно быть пустым',
         'string.length': 'Длина поля "articleId" должна быть 24 символа',
@@ -32,7 +31,7 @@ const validationDataUser = celebrate({
         'string.empty': 'Поле "email" не должно быть пустым',
         'string.email': 'Поле "email" должно быть валидным email-адресом',
       }),
-    password: Joi.string().required().min(5)
+    password: Joi.string().required().trim().min(1)
       .message({
         'any.required': 'Поле "password" должно быть заполнено',
         'string.empty': 'Поле "password" не должно быть пустым',
@@ -57,22 +56,22 @@ const validationDataArticle = celebrate({
         'string.min': 'Минимальная длина поля "keyword" - 2 символа',
         'string.max': 'Максимальная длина поля "keyword" - 30 символов',
       }),
-    title: Joi.string().required().custom(checkValueEmpty)
+    title: Joi.string().required().trim().min(1)
       .messages({
         'any.required': 'Поле "title" должно быть заполнено',
         'string.empty': 'Поле "title" не должно быть пустым',
       }),
-    text: Joi.string().required().custom(checkValueEmpty)
+    text: Joi.string().required().trim().min(1)
       .messages({
         'any.required': 'Поле "text" должно быть заполнено',
         'string.empty': 'Поле "text" не должно быть пустым',
       }),
-    date: Joi.string().required().custom(checkValueEmpty)
+    date: Joi.string().required().trim().min(1)
       .messages({
         'any.required': 'Поле "date" должно быть заполнено',
         'string.empty': 'Поле "date" не должно быть пустым',
       }),
-    source: Joi.string().required().custom(checkValueEmpty)
+    source: Joi.string().required().trim().min(1)
       .messages({
         'any.required': 'Поле "source" должно быть заполнено',
         'string.empty': 'Поле "source" не должно быть пустым',

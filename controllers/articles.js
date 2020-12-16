@@ -5,10 +5,11 @@ const BadRequestErr = require('../errors/bad-request-err');
 const ConflictError = require('../errors/conflict-err');
 
 const getArticles = async (req, res, next) => {
+  const owner = req.user;
   try {
-    const queryCard = await Article.find({}).populate('user')
+    const queryArticles = await Article.find({ owner }).populate('user')
       .orFail(new NotFoundError('Пользователя не существует'));
-    res.status(200).send(queryCard);
+    res.status(200).send(queryArticles);
   } catch (err) {
     next(err);
   }
@@ -42,7 +43,8 @@ const deleteArticle = async (req, res, next) => {
     const user = String(req.user);
 
     const { articleId } = req.params;
-    const queryArticle = await Article.findById(articleId)
+
+    const queryArticle = await Article.findById(articleId).select('+owner')
       .orFail(new NotFoundError('Карточка не найдена'));
     const queryCardOwner = String(queryArticle.owner);
 
@@ -51,6 +53,8 @@ const deleteArticle = async (req, res, next) => {
     }
 
     const deletedArticle = await Article.findByIdAndDelete(articleId);
+    const data = deletedArticle.toJSON();
+    delete data.owner;
     return res.send(deletedArticle);
   } catch (err) {
     next(err);
