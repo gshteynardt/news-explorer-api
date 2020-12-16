@@ -4,8 +4,6 @@ const {
   getUser,
 } = require('../controllers/users');
 
-const { idUserValidation } = require('../middlewares/validation');
-
-router.get('/users/me', idUserValidation, getUser);
+router.get('/users/me', getUser);
 
 module.exports = router;
