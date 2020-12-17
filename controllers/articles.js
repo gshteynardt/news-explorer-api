@@ -8,7 +8,7 @@ const getArticles = async (req, res, next) => {
   const owner = req.user;
   try {
     const queryArticles = await Article.find({ owner }).populate('user')
-      .orFail(new NotFoundError('Пользователя не существует'));
+      .orFail(new NotFoundError('Пользователь не имеет сохраненных статей'));
     res.status(200).send(queryArticles);
   } catch (err) {
     next(err);
