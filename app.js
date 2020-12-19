@@ -11,12 +11,8 @@ const errorsHendler = require('./middlewares/errorsHendler');
 
 const {
   port,
-  devUrl,
   endpoint,
-  nodeEnv,
 } = require('./utils/config.js');
-
-const urlDB = nodeEnv === 'production' ? endpoint : devUrl;
 
 const app = express();
 app.use(bodyParser.json());
@@ -25,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(limiter);
 app.use(cors());
-mongoose.connect(urlDB, {
+mongoose.connect(endpoint, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,

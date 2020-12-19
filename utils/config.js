@@ -1,14 +1,19 @@
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 const devUrl = 'mongodb://localhost:27017/newsdb';
 const devJWT = 'dev-secret';
+const {
+  API_URL, PORT, NODE_ENV, JWT_SECRET,
+} = process.env;
+
+const port = PORT || 3000;
+const endpoint = NODE_ENV === 'production' ? API_URL : devUrl;
+const jwtKey = NODE_ENV === 'production' ? JWT_SECRET : devJWT;
 
 module.exports = {
-  endpoint: process.env.API_URL,
-  port: process.env.PORT,
-  nodeEnv: process.env.NODE_ENV,
-  jwtKey: process.env.JWT_SECRET,
-  devUrl,
-  devJWT,
+  endpoint,
+  port,
+  jwtKey,
 };

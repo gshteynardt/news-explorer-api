@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
-const { jwtKey, nodeEnv, devJWT } = require('./config.js');
-
-const jwtSecret = nodeEnv === 'production' ? jwtKey : devJWT;
+const { jwtKey } = require('./config.js');
 
 module.exports.generateToken = (id) => jwt.sign({ _id: id },
-  jwtSecret,
+  jwtKey,
   { expiresIn: '7d' });
