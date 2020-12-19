@@ -40,7 +40,7 @@ const createArticle = async (req, res, next) => {
 
 const deleteArticle = async (req, res, next) => {
   try {
-    const user = String(req.user);
+    const user = req.user._id;
 
     const { articleId } = req.params;
 

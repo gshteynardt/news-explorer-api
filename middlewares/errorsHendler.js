@@ -7,7 +7,6 @@ const errorsHendler = (err, req, res, next) => {
         ? 'На сервере произошла ошибка'
         : message,
     });
-
   return next();
 };
 

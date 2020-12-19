@@ -8,18 +8,24 @@ const limiter = require('./middlewares/limiter');
 const routers = require('./routes/index.js');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorsHendler = require('./middlewares/errorsHendler');
-const { devUrl } = require('./utils/config');
-require('dotenv').config();
+
+const {
+  port,
+  devUrl,
+  endpoint,
+  nodeEnv,
+} = require('./utils/config.js');
+
+const urlDB = nodeEnv === 'production' ? endpoint : devUrl;
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-const { PORT = 3000 } = process.env;
 
 app.use(helmet());
 app.use(limiter);
 app.use(cors());
-mongoose.connect(devUrl, {
+mongoose.connect(urlDB, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -31,6 +37,6 @@ app.use(errorLogger);
 app.use(errors());
 app.use(errorsHendler);
 
-app.listen(PORT, () => {
-  console.log(`server is running ${PORT}`);
+app.listen(port, () => {
+  console.log(`server is running ${port}`);
 });
