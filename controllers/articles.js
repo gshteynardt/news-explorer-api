@@ -46,6 +46,7 @@ const deleteArticle = async (req, res, next) => {
 
     const queryArticle = await Article.findById(articleId).select('+owner')
       .orFail(new NotFoundError('Карточка не найдена'));
+
     const queryCardOwner = String(queryArticle.owner);
 
     if (user !== queryCardOwner) {
