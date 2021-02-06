@@ -25,6 +25,7 @@ mongoose.connect(endpoint, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
+  useUnifiedTopology: true,
 });
 
 app.use(requestLogger);
