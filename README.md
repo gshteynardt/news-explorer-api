@@ -23,7 +23,7 @@ $ npm run dev
 ```
 
 # Routes and methods:
-Api доступно по https://api.shteyn.students.nomoredomains.monster
+Api доступно по https://api.shtey.students.nomoredomains.monster
 
 * post: '/signup' - регистрация
 
